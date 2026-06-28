@@ -30,7 +30,7 @@ fig.update_layout(
 app = Dash()
 app.layout = html.Div(children=[
     html.Div(children=[
-        html.H1(style={'color': colors['text'], 'fontSize':'48px', 'paddingTop': '16px', 'margin':'0px'}, children='Soul Foods'),
+        html.H1(id="header", style={'color': colors['text'], 'fontSize':'48px', 'paddingTop': '16px', 'margin':'0px'}, children='Soul Foods'),
         html.Div(style={'color': colors['text']}, children='''
         Were sales higher before or after the Pink Morsel price increase on the 15th of January, 2021?
     '''),
