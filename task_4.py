@@ -29,29 +29,32 @@ fig.update_layout(
 
 app = Dash()
 app.layout = html.Div(children=[
-    html.H1(style={'color': colors['text']}, children='Soul Foods'),
-
-    html.Div(style={'color': colors['text']}, children='''
+    html.Div(children=[
+        html.H1(style={'color': colors['text'], 'fontSize':'48px', 'paddingTop': '16px', 'margin':'0px'}, children='Soul Foods'),
+        html.Div(style={'color': colors['text']}, children='''
         Were sales higher before or after the Pink Morsel price increase on the 15th of January, 2021?
     '''),
-    dcc.RadioItems(
-        id="selection",
-        options=["north", "south", "east", "west", "all"],
-        value="all",
-        labelStyle={
-            'color': colors['text']
-        },
-        inline=True),
+        dcc.RadioItems(
+            id="selection",
+            options=["north", "south", "east", "west", "all"],
+            value="all",
+            labelStyle={
+                'color': colors['text']
+            },
+            inline=True)
+    ],
+        style={
+            'paddingLeft': '5%'
+        }),
     dcc.Graph(
         id='graph',
         figure=fig
     )
-], style={
-    'backgroundColor': colors['background'],
-    'height': '100vh',
-    'padding': '0px',
-    'margin': '0px'
-})
+], id="body",
+    style={
+        'backgroundColor': colors['background'],
+        'height': '100vh'
+    })
 
 
 @callback(
@@ -69,7 +72,8 @@ def select_data(region):
             daily_sales=('sale', 'sum')
         )
 
-    result = px.line(processed, y="daily_sales", color_discrete_sequence=[colors[region]], title='Daily Sales over Time')
+    result = px.line(processed, y="daily_sales", color_discrete_sequence=[colors[region]],
+                     title='Daily Sales over Time')
     result.update_layout(
         plot_bgcolor=colors['background'],
         paper_bgcolor=colors['background'],
